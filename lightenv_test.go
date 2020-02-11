@@ -12,12 +12,16 @@ func TestProcess_Normal_1(t *testing.T) {
 	os.Setenv("APP_NAME", "TEST")
 	os.Setenv("IP", "192.168.1.1")
 	os.Setenv("APP_NUMBER", "-1")
+	os.Setenv("APP_NUMBER_32", "2147483647")
+	os.Setenv("APP_NUMBER_64", "9223372036854775807")
 	os.Setenv("APP_DISABLE_DEFAULT", "dummy")
 
 	type Specification struct {
 		AppName           string `name:"APP_NAME"`
 		IP                string
 		AppNumber         int    `name:"APP_NUMBER" required:"true"`
+		AppNumber32       int32  `name:"APP_NUMBER_32" required:"true"`
+		AppNumber64       int64  `name:"APP_NUMBER_64" required:"true"`
 		AppEnableDefault  string `name:"APP_ENABLE_DEFAULT" default:"myDefault"`
 		AppDisableDefault string `name:"APP_DISABLE_DEFAULT"`
 		AppNoParam        string `name:"APP_NO_PARAM"`
@@ -31,6 +35,8 @@ func TestProcess_Normal_1(t *testing.T) {
 		AppName:           "TEST",
 		IP:                "192.168.1.1",
 		AppNumber:         -1,
+		AppNumber32:       2147483647,
+		AppNumber64:       9223372036854775807,
 		AppEnableDefault:  "myDefault",
 		AppDisableDefault: "dummy",
 		AppNoParam:        "",
@@ -95,5 +101,20 @@ func TestProcess_AbNormal_4(t *testing.T) {
 	err := Process(&res)
 	if err == nil {
 		t.Error("Process expect to occur error. Because of illegal input type")
+	}
+}
+
+func TestProcess_AbNormal_5(t *testing.T) {
+	os.Clearenv()
+	os.Setenv("APP_NUMBER_32", "2147483648")
+
+	type Specification struct {
+		AppNumber32 int32 `name:"APP_NUMBER_32" required:"true"`
+	}
+
+	var res Specification
+	err := Process(&res)
+	if err == nil {
+		t.Error("Process expect to occur error. Because of overflow as int32")
 	}
 }

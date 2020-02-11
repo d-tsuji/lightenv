@@ -92,12 +92,11 @@ func gatherInfo(spec interface{}) ([]varInfo, error) {
 }
 
 func setParameter(value string, field reflect.Value) error {
-	// Set key parameter
 	typ := field.Type()
 	switch typ.Kind() {
 	case reflect.String:
 		field.SetString(value)
-	case reflect.Int:
+	case reflect.Int, reflect.Int64, reflect.Int32, reflect.Int16, reflect.Int8:
 		val, err := strconv.ParseInt(value, 0, typ.Bits())
 		if err != nil {
 			return err
