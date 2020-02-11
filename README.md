@@ -1,4 +1,4 @@
-# lightenv ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg) [![GoDoc](https://godoc.org/github.com/d-tsuji/lightenv?status.svg)](https://godoc.org/github.com/d-tsuji/lightenv)
+# lightenv [![Go Report Card](https://goreportcard.com/badge/github.com/d-tsuji/lightenv)](https://goreportcard.com/report/github.com/d-tsuji/lightenv) ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg) [![GoDoc](https://godoc.org/github.com/d-tsuji/lightenv?status.svg)](https://godoc.org/github.com/d-tsuji/lightenv)
 
 The lightenv is a lightweight library that handles environment variables. The thin wrapper using the standard [os](https://golang.org/pkg/os) library. This library is inspired by [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig).
 
