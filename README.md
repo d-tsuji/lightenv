@@ -28,9 +28,9 @@ import (
 )
 
 type Sample struct {
-	Url            string `name:"APP_URL" required:"true"`
-	PORT           string `required:"true"`
-	ConcurrencyNum int    `name:"CONCURRENCY_NUM" required:"true"`
+	Url            string `required:"true" name:"APP_URL"`
+	Port           string `required:"true"`
+	ConcurrencyNum int    `required:"true" name:"CONCURRENCY_NUM"`
 }
 
 func main() {
