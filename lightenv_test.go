@@ -118,3 +118,18 @@ func TestProcess_AbNormal_5(t *testing.T) {
 		t.Error("Process expect to occur error. Because of overflow as int32")
 	}
 }
+
+func TestProcess_AbNormal_6(t *testing.T) {
+	os.Clearenv()
+	os.Setenv("APP_NUMBER", "TEST")
+
+	type Specification struct {
+		AppName float64 `name:"APP_NUMBER"`
+	}
+
+	var res Specification
+	err := Process(&res)
+	if err == nil {
+		t.Error("Process expect to occur error. Because of APP_NUMBER is float64 but actual string")
+	}
+}
