@@ -25,4 +25,10 @@ jobs:
 
       - name: Test
         run: |
-          go test -v ./...
+          go test -v -cover -coverprofile=c.out
+
+      - name: Send coverage
+        uses: shogo82148/actions-goveralls@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-profile: c.out
