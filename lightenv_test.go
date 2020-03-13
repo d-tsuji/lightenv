@@ -15,16 +15,20 @@ func TestProcess_Normal_1(t *testing.T) {
 	os.Setenv("APP_NUMBER_32", "2147483647")
 	os.Setenv("APP_NUMBER_64", "9223372036854775807")
 	os.Setenv("APP_DISABLE_DEFAULT", "dummy")
+	os.Setenv("APP_NOT_SET", "not set")
+	os.Setenv("X_PI", "3.14")
 
 	type Specification struct {
 		AppName           string `name:"APP_NAME"`
 		IP                string
-		AppNumber         int    `name:"APP_NUMBER" required:"true"`
-		AppNumber32       int32  `name:"APP_NUMBER_32" required:"true"`
-		AppNumber64       int64  `name:"APP_NUMBER_64" required:"true"`
-		AppEnableDefault  string `name:"APP_ENABLE_DEFAULT" default:"myDefault"`
-		AppDisableDefault string `name:"APP_DISABLE_DEFAULT"`
-		AppNoParam        string `name:"APP_NO_PARAM"`
+		AppNumber         int     `name:"APP_NUMBER" required:"true"`
+		AppNumber32       int32   `name:"APP_NUMBER_32" required:"true"`
+		AppNumber64       int64   `name:"APP_NUMBER_64" required:"true"`
+		AppEnableDefault  string  `name:"APP_ENABLE_DEFAULT" default:"myDefault"`
+		AppDisableDefault string  `name:"APP_DISABLE_DEFAULT"`
+		AppNoParam        string  `name:"APP_NO_PARAM"`
+		Pi                float64 `name:"X_PI"`
+		unexported        string  `name:"APP_NOT_SET"`
 	}
 
 	var res Specification
@@ -40,8 +44,11 @@ func TestProcess_Normal_1(t *testing.T) {
 		AppEnableDefault:  "myDefault",
 		AppDisableDefault: "dummy",
 		AppNoParam:        "",
+		Pi:                3.14,
+		unexported:        "",
 	}
-	if diff := cmp.Diff(res, expected); diff != "" {
+	opt := cmp.AllowUnexported(expected)
+	if diff := cmp.Diff(res, expected, opt); diff != "" {
 		t.Errorf("TestProcess differs: (-got +want)\n%s", diff)
 	}
 }
@@ -131,5 +138,16 @@ func TestProcess_AbNormal_6(t *testing.T) {
 	err := Process(&res)
 	if err == nil {
 		t.Error("Process expect to occur error. Because of APP_NUMBER is float64 but actual string")
+	}
+}
+
+func TestProcess_AbNormal_7(t *testing.T) {
+	os.Clearenv()
+
+	m := map[string]interface{}{}
+
+	err := Process(&m)
+	if err == nil {
+		t.Error("Process expect to occur error. Because of illegal input type. Input must be a struct.")
 	}
 }
