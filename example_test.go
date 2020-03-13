@@ -29,13 +29,9 @@ func Example() {
 }
 
 func ExampleProcess() {
-	os.Setenv("APP_URL", "http://localhost")
-	os.Setenv("PORT", "8888")
 
 	type Sample struct {
-		Url            string `name:"APP_URL" required:"true"`
-		PORT           string `required:"true"`
-		ConcurrencyNum int    `name:"CONCURRENCY_NUM" required:"true"`
+		Env string `name:"APP_ENV" required:"true"`
 	}
 
 	var s Sample
@@ -43,5 +39,5 @@ func ExampleProcess() {
 		fmt.Printf("%+v", err)
 	}
 
-	// Output: required key CONCURRENCY_NUM missing value
+	// Output: required key APP_ENV missing value
 }
