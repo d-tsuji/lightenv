@@ -52,11 +52,11 @@ You will see the following output:
 
 It supports the tags shown in the example above.
 
-| #   | Tag                    | Detail                                                                                                                                                                                      | Default value            |
-| --- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| 1   | `name:"ENV_PARAM_NAME` | Get the parameter set as ENV_PARAM_NAME from environment variables. <br> If nothing is set, the structure field name UPPER_CASE is used.                                                    | UPPER_CASE of field name |
-| 2   | `required:"true"`      | Requires that the environment variable is set. Requires that the environment variable is set. <br>  If this parameter is true and the environment variable is not set, an error will occur. | "false"                  |
-| 3   | `default:"8888"`       | Sets the default value if the environment variable has not been set.                                                                                                                        | -                        |
+| #   | Tag                    | Detail                                                                                                                                                                                                                     | Default value            |
+| --- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| 1   | `name:"ENV_PARAM_NAME` | Tag "name" is to get the parameter set as ENV_PARAM_NAME from environment variables. <br> If nothing is set, the structure field name UPPER_CASE is used.                                                                  | UPPER_CASE of field name |
+| 2   | `required:"true"`      | Tag "required" is to require that the environment variable is absolutely set. Requires that the environment variable is set. <br>  If this parameter is true and the environment variable is not set, an error will occur. | "false"                  |
+| 3   | `default:"8888"`       | Tag "default" is to set the default value if the environment variable has not been set.                                                                                                                                    | -                        |
 
 ## Struct Type Support
 
