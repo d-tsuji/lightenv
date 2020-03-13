@@ -10,6 +10,7 @@ import (
 
 // Process receives and sets a type
 // that defines a list that gets its value from an environment variable.
+// Arguments must be passed in pointer type.
 //
 // Types that can be received as environment variables support string, int, float32, and float64.
 func Process(input interface{}) error {
